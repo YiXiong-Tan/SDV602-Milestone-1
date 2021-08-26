@@ -2,13 +2,21 @@ import PySimpleGUI as sg
 from PySimpleGUI.PySimpleGUI import WIN_CLOSED
 import login, dataExplorer
 
-def window():
+def close(home_window):
+    """
+    By creating a function that can be used outside of this file, 
+    we can call this function to perform task in this window.
+    """
+    home_window.close()
+    login.window()
+
+def window(credentials={}):
     """
     This is the home window.
     Navigation to the data explorer screen happens here.
     Can also add a new csv file here.
     """
-    layout = [  [sg.Column([[sg.B('Logout')]],justification='r')],
+    layout = [  [sg.Column([[sg.Text(f'Welcome, {credentials["username"]}')]],justification='l',expand_x=True),sg.Column([[sg.B('Logout')]],justification='r')],
                 [sg.Text('What do you want to do?', size=(30, 1), justification='center', font=("Helvetica", 25))],
                 [sg.Column([
                     [sg.Text('Explore:')],
@@ -34,11 +42,3 @@ def window():
             dataExplorer.window(event, home_window)
 
     home_window.close()
-
-def close(home_window):
-    """
-    By creating a function that can be used outside of this file, 
-    we can call this function to perform task in this window.
-    """
-    home_window.close()
-    login.window()

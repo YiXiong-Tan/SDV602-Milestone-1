@@ -1,10 +1,11 @@
 import PySimpleGUI as sg
 from PySimpleGUI.PySimpleGUI import WIN_CLOSED
-import register, app
+import register, app, error
+import hashlib
 
 def window():
     """
-        The login window.
+    The login window.
     """
 
     result = ''
@@ -15,15 +16,15 @@ def window():
                     [sg.Text('Username')],
                     [sg.Input(key='username')],
                     [sg.Text('Password')],
-                    [sg.Input(key='password')],
-                    [sg.Button('Register'),
-                    sg.Button('Login')],
-                    [sg.Text(k='results_messages')]
+                    [sg.Input(key='password',password_char='*')],
+                    [sg.Button('Register'), sg.Button('Login')],
+                    [sg.Text(k='error_messages',size=(40,3))]
                     ],justification='c')
                 ]
               ]
 
     window = sg.Window('World Leading.. DES', layout)
+    credentials ={}
 
     while True:
         event, values = window.read()
@@ -36,15 +37,36 @@ def window():
             
             # Go to register window
             register.window()
-            
+        
         if event == 'Login':
-            window.close()
-            
-            # if true, go to main app 
-            app.main()
+
+            result = ''
+            err_msgs = []
+            username, password = values['username'], values['password']
 
             # if false, display the error message
+            # ****for prototyping - if username = 'user2' display error message****
+            # ****check for blank spaces****
+            if username == 'user2' or username == '' or password == '':
+                
+                result = 'Failed'
+                err_msgs = ['Login Failed','- Invalid Username/Password!']
 
+                error.displayMessages(window,err_msgs)
+
+            else:
+                result = ''
+                err_msgs = []
+                
+                window.close()
+                
+                # if true, go to main app 
+
+                credentials["username"], credentials["password"] = username, password
+
+                app.main(credentials)
+
+            
     window.close()
 
 

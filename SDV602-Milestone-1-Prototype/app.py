@@ -1,10 +1,10 @@
 import home
 
-def main():
+def main(credentials):
     """
     The purpose of main is to perform some validation tasks before going to the home page.
     """
     try:
-        home.window()
+        home.window(credentials)
     except ValueError:
         print(ValueError)

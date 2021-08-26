@@ -1,6 +1,32 @@
 import PySimpleGUI as sg
 from PySimpleGUI.PySimpleGUI import WIN_CLOSED
-import login
+import login, error
+def validate(window, values):
+    username = values['username']
+    password = values['password']
+    fruit = values['fruit']
+    result = ''
+
+    # reset message
+    error.displayMessages(window)
+
+    # -------------------------------- validate username, password and favourite fruit-------------------------------------
+    if username == 'user2':
+        result = 'Failed'
+        err_msg = ['Register Failed','-Duplicate Username']
+        error.displayMessages(window,err_msg)
+
+    if username == '' or password == '' or fruit == '':
+        result = 'Failed'
+        err_msg = ['Register Failed','-Can\'t leave anything blank!']
+        error.displayMessages(window,err_msg)
+
+    if fruit.lower() == 'apple' or fruit.lower() == 'apples':
+        result = 'Failed'
+        err_msg = ['Register Failed','-What apples?!']
+        error.displayMessages(window,err_msg)
+
+    return result
 
 def window():
     """
@@ -20,9 +46,8 @@ def window():
                     [sg.Input(key='password')],
                     [sg.Text('What\'s your favourite fruit?')],
                     [sg.Input(key='fruit')],
-                    [sg.Button('Back'),
-                    sg.Button('Submit')],
-                    [sg.Text(k='results_messages')]
+                    [sg.Button('Back'),sg.Button('Submit')],
+                    [sg.Text(k='messages',size=(50,3))]
                     ], justification='c')
                 ]
               ]
@@ -43,11 +68,12 @@ def window():
 
         if event == 'Submit':
             # validate registration
-            
-            # if good, go to login window
-            window.close()
-            login.window()
+            result = validate(window, values)
 
-            # if false, display the error message
+            if not 'Failed' == result:
+                # go to login window
+                window.close()
+                login.window()
+
 
     window.close()
