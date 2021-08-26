@@ -7,10 +7,7 @@ from icons import minus20x20, plus20x20
 def window(key='', home_window=sg.Window('')):
 
     def make_layout():
-        
-        # -------------------------------placeholder for graph-------------------------------
-
-
+      
         # -------------------------------layout-------------------------------
         layout = [
             [
@@ -75,7 +72,7 @@ def window(key='', home_window=sg.Window('')):
 
             # when loging out, close the home window as well
             if event == 'Logout':
-                home.close(home_window)
+                home.window_close(home_window)
 
             break
 

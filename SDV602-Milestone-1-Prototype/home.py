@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 from PySimpleGUI.PySimpleGUI import WIN_CLOSED
 import login, dataExplorer
 
-def close(home_window):
+def window_close(home_window):
     """
     By creating a function that can be used outside of this file, 
     we can call this function to perform task in this window.
@@ -36,9 +36,10 @@ def window(credentials={}):
             break
 
         if event == 'Logout':
-            close(home_window)
+            window_close(home_window)
 
         if event == 'key1' or event == 'key2' or event == 'key3':
             dataExplorer.window(event, home_window)
-
-    home_window.close()
+    
+    if not home_window == None:
+        home_window.close()
