@@ -1,4 +1,11 @@
 def displayMessages(window,messages=['']):
+    """
+    Display messages based on the window
+
+    Args:
+        window (Window): specify the window of message to be displayed
+        messages (list): PySimpleGUI window
+    """
     
     # update messages text
     message_in_line = ''

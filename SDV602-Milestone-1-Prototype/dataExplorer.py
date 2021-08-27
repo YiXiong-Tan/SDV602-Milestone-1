@@ -5,8 +5,18 @@ from icons import minus20x20, plus20x20
 
 
 def window(key='', home_window=sg.Window('')):
+    """
+    This function opens the window for the 3 DESes
+
+    Args:
+        key (str): specify the window selected. 'key1' = 1st DES, 'key2' = 2nd DES, 'key3' = 3rd DES
+        home_window (obj): PySimpleGUI window
+    """
 
     def make_layout():
+        """
+        This nested function makes the layout for the DESes. 
+        """
       
         # -------------------------------layout-------------------------------
         layout = [
@@ -31,7 +41,7 @@ def window(key='', home_window=sg.Window('')):
             ]
         ]
 
-        # update title
+        # update title based on the key supplied
         title = ''
         if key == 'key1':
             title = '2015 Fire occurence'

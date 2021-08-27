@@ -18,7 +18,7 @@ def window():
                     [sg.Text('Password')],
                     [sg.Input(key='password',password_char='*')],
                     [sg.Button('Register'), sg.Button('Login')],
-                    [sg.Text(k='messages',size=(40,3))]
+                    [sg.Text(k='messages',size=(40,5))]
                     ],justification='c')
                 ]
               ]
@@ -50,7 +50,7 @@ def window():
             if username == 'user2' or username == '' or password == '':
                 
                 result = 'Failed'
-                err_msgs = ['Login Failed','- Invalid Username/Password!']
+                err_msgs = ['Login Failed','- Invalid Username/Password!', '- Duplicate login']
 
                 error.displayMessages(window,err_msgs)
 

@@ -2,6 +2,19 @@ import PySimpleGUI as sg
 from PySimpleGUI.PySimpleGUI import WIN_CLOSED
 import login, error
 def validate(window, values):
+    """
+    Validates the username and password during registration
+    
+    Args:
+        window (module): window where the graph is to be plotted
+        values (list): contains the input params:
+                        - username
+                        - password
+                        - fruit
+
+    Returns:
+        result (str): returns the 'Failed' string for a failed status.
+    """
     username = values['username']
     password = values['password']
     fruit = values['fruit']
@@ -14,16 +27,16 @@ def validate(window, values):
     if username == 'user2':
         result = 'Failed'
         err_msg = ['Register Failed','-Duplicate Username']
-        error.displayMessages(window,err_msg)
 
     if username == '' or password == '' or fruit == '':
         result = 'Failed'
         err_msg = ['Register Failed','-Can\'t leave anything blank!']
-        error.displayMessages(window,err_msg)
 
     if fruit.lower() == 'apple' or fruit.lower() == 'apples':
         result = 'Failed'
         err_msg = ['Register Failed','-What apples?!']
+    
+    if result == 'Failed':
         error.displayMessages(window,err_msg)
 
     return result
